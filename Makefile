@@ -1,4 +1,4 @@
-SRC = main.c read_file.c change_comb.c fill_square.c
+SRC = main.c read_file.c change_comb.c fill_matrix.c
 OBJ = $(SRC:.c=.o)
 NAME = fillit
 FLAGS = -Wall -Werror -Wextra

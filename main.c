@@ -60,7 +60,7 @@ int		main(int ac, char **av)
 	else
         ft_putendl(ft_itoa(get_side(len * 4)));
     // check_change_comb(len, arr);
-	fill_square(get_side(len * 4), len, arr);
+	fill_matrix(get_side(len * 4), len, arr);
 	clock_t stop = clock();
 	double elapsed = (double)(stop - start) / CLOCKS_PER_SEC;
 	printf("time of program work: %f", elapsed);
