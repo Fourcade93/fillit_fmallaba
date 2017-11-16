@@ -9,7 +9,15 @@ typedef struct	s_sq
 	int			y;
 }				t_sq;
 
-void		check_change_comb(int len);
+typedef struct  s_matrix
+{
+    int         col;
+    int         row;
+    char        field;
+}               t_matrix;
+
+void		fill_square(int side, int len, t_sq arr[26][4]);
+void		check_change_comb(int len, t_sq arr[26][4]);
 int			read_file(int fd, t_sq arr[26][4]);
 
 #endif

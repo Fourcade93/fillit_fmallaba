@@ -1,23 +1,67 @@
 #include "fillit.h"
 #include "libft.h"
 
-int     *pos_arr;
+t_sq           pos_arr[26];
 
-void    init_pos_arr(int len)
+static void    swap_sq(t_sq *a, t_sq *b)
+{
+    t_sq    tmp;
+
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+static void    init_pos_arr(int len)
 {
     int i;
 
-    pos_arr = (int*)malloc(sizeof(int) * len);
     i = 0;
-    if (pos_arr)
-        while (i < len)
-        {
-            pos_arr[i] = i;
-            i++;
-        }
+    while (i < len)
+    {
+        pos_arr[i].x = i;
+        pos_arr[i].y = -1;
+        i++;
+    }
 }
 
-void    sort_arr(int curr, int len)
+static int    check_tetro(t_sq a[4], t_sq b[4])
+{
+    int i;
+
+    i = 0;
+    while (i < 4)
+    {
+        if (a[i].x != b[i].x || a[i].y != b[i].y)
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+static void    set_marker(int len, t_sq arr[26][4])
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i < len)
+    {
+        j = i + 1;
+        while (j < len)
+        {
+            if (check_tetro(arr[i], arr[j]))
+            {
+                pos_arr[i].y = pos_arr[i].x;
+                pos_arr[j].y = pos_arr[i].x;
+            }
+            j++;
+        }
+        i++;
+    }
+}
+
+static void    sort_arr(int curr, int len)
 {
     int next;
 
@@ -27,15 +71,15 @@ void    sort_arr(int curr, int len)
         next = curr + 1;
         while (next < len)
         {
-            if (pos_arr[curr] > pos_arr[next])
-                ft_swap(&pos_arr[curr], &pos_arr[next]);
+            if (pos_arr[curr].x > pos_arr[next].x)
+                swap_sq(&pos_arr[curr], &pos_arr[next]);
             next++;
         }
         curr++;
     }
 }
 
-void    swap_next(curr, len)
+static void    swap_next(curr, len)
 {
     int min;
     int i;
@@ -44,28 +88,28 @@ void    swap_next(curr, len)
     i = curr + 1;
     while (i < len)
     {
-        if (pos_arr[i] < pos_arr[min] && pos_arr[i] > pos_arr[curr])
+        if (pos_arr[i].x < pos_arr[min].x && pos_arr[i].x > pos_arr[curr].x)
             min = i;
         i++;
     }
-    ft_swap(&pos_arr[curr], &pos_arr[min]);
+    swap_sq(&pos_arr[curr], &pos_arr[min]);
 }
 
-void    change_comb(int len)
+void            change_comb(int len)
 {
     int next;
     int curr;
 
     curr = len - 1;
-    if (pos_arr[curr] > pos_arr[curr - 1])
+    if (pos_arr[curr].x > pos_arr[curr - 1].x)
     {
-        ft_swap(&pos_arr[curr], &pos_arr[curr - 1]);
+        swap_sq(&pos_arr[curr], &pos_arr[curr - 1]);
         return ;
     }
     while (curr > 0)
     {
         next = curr - 1;
-        if (pos_arr[curr] > pos_arr[next])
+        if (pos_arr[curr].x > pos_arr[next].x)
         {
             swap_next(next, len);
             sort_arr(curr, len);
@@ -75,19 +119,27 @@ void    change_comb(int len)
     }
 }
 
-void    check_change_comb(int len)
+int             pop_tetro(int num)
+{
+    return (pos_arr[num].x);
+}
+
+void    check_change_comb(int len, t_sq arr[26][4]) //delete_me!!!
 {
     int i;
     int j;
 
     init_pos_arr(len);
+    set_marker(len, arr);
     i = ft_iterative_factorial(len);
     while (i)
     {
         j = 0;
         while (j < len)
         {
-            ft_putstr(ft_itoa(pos_arr[j]));
+            ft_putstr(ft_itoa(pos_arr[j].x));
+            ft_putchar(' ');
+            ft_putstr(ft_itoa(pos_arr[j].y));
             ft_putstr(", ");
             j++;
         }

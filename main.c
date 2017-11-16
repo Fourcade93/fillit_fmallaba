@@ -6,7 +6,7 @@
 #define MISS "Filename missing"
 #define MANY "Too many arguments"
 
-void	print_arr(t_sq arr[26][4], int len) //delete_me
+void	print_arr(t_sq arr[26][4], int len) //delete_me!!!
 {
 	int i;
 	int	j;
@@ -58,8 +58,9 @@ int		main(int ac, char **av)
 	if (len == -1)
 		ft_putendl("Error");
 	else
-		ft_putendl(ft_itoa(get_side(len * 4)));
-	check_change_comb(len);
+        ft_putendl(ft_itoa(get_side(len * 4)));
+    // check_change_comb(len, arr);
+	fill_square(get_side(len * 4), len, arr);
 	clock_t stop = clock();
 	double elapsed = (double)(stop - start) / CLOCKS_PER_SEC;
 	printf("time of program work: %f", elapsed);
