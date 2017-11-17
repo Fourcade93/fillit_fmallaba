@@ -12,7 +12,7 @@ static void    swap_sq(t_sq *a, t_sq *b)
     *b = tmp;
 }
 
-static void    init_pos_arr(int len)
+void          init_pos_arr(int len)
 {
     int i;
 
@@ -39,7 +39,7 @@ static int    check_tetro(t_sq a[4], t_sq b[4])
     return (1);
 }
 
-static void    set_marker(int len, t_sq arr[26][4])
+void           set_marker(int len, t_sq arr[26][4])
 {
     int i;
     int j;
@@ -48,15 +48,16 @@ static void    set_marker(int len, t_sq arr[26][4])
     while (i < len)
     {
         j = i + 1;
-        while (j < len)
-        {
-            if (check_tetro(arr[i], arr[j]))
+        if (pos_arr[i].y == -1)
+            while (j < len)
             {
-                pos_arr[i].y = pos_arr[i].x;
-                pos_arr[j].y = pos_arr[i].x;
+                if (check_tetro(arr[i], arr[j]) && pos_arr[j].y == -1)
+                {
+                    pos_arr[i].y = pos_arr[i].x;
+                    pos_arr[j].y = pos_arr[i].x;
+                }
+                j++;
             }
-            j++;
-        }
         i++;
     }
 }
@@ -119,6 +120,43 @@ void            change_comb(int len)
     }
 }
 
+int             check_pos_arr(int len)
+{
+    int i;
+    int j;
+
+    i = -1;
+    while (++i < len)
+    {
+        if (pos_arr[i].y != -1)
+        {
+            j = i;
+            while (++j < len)
+            {
+                if (pos_arr[i].y == pos_arr[j].y && \
+                    pos_arr[i].x > pos_arr[j].x)
+                    return (0);
+            }
+        }
+    }
+    return (1);
+}
+
+int             is_sort_arr(int len)
+{
+    int i;
+    int j;
+
+    i = -1;
+    while (++i < len - 1)
+    {
+        j = i + 1;
+        if (pos_arr[i].x < pos_arr[j].x)
+            return (0);
+    }
+    return (1);
+}
+
 int             pop_tetro(int num)
 {
     return (pos_arr[num].x);
@@ -135,15 +173,18 @@ void    check_change_comb(int len, t_sq arr[26][4]) //delete_me!!!
     while (i)
     {
         j = 0;
-        while (j < len)
+        if (check_pos_arr(len))
         {
-            ft_putstr(ft_itoa(pos_arr[j].x));
-            ft_putchar(' ');
-            ft_putstr(ft_itoa(pos_arr[j].y));
-            ft_putstr(", ");
-            j++;
+            while (j < len)
+            {
+                ft_putstr(ft_itoa(pos_arr[j].x));
+                ft_putchar(' ');
+                ft_putstr(ft_itoa(pos_arr[j].y));
+                ft_putstr(", ");
+                j++;
+            }
+            ft_putchar('\n');
         }
-        ft_putchar('\n');
         change_comb(len);
         i--;
     }

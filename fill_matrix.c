@@ -3,7 +3,7 @@
 
 t_matrix    matrix[26][200];
 
-void    init_matrix(int side)
+void    init_matrix(int side, int len)
 {
     int i;
     int j;
@@ -11,7 +11,7 @@ void    init_matrix(int side)
     int row;
 
     i = -1;
-    while (++i < side)
+    while (++i < len)
     {
         j = -1;
         col = 0;
@@ -75,7 +75,13 @@ void    add_tetro(int num, int i, int side, t_sq sub[4], char c)
     }
 }
 
-void    put_tetro(int side, int num, t_sq sub[4])
+void    put_marker(int side, int num, int i, t_sq sub[4], int len)
+{
+    while (++num < len)
+        add_tetro(num, i, side, sub, '-');
+}
+
+int    put_tetro(int side, int num, t_sq sub[4], char c, int len)
 {
     int i;
 
@@ -83,30 +89,89 @@ void    put_tetro(int side, int num, t_sq sub[4])
     while (++i < (side * side))
     {
         if (matrix[num][i].field == '.' && check_field(num, i, side, sub))
-            add_tetro(num, i, side, sub, num + 'A');
+        {
+            add_tetro(num, i, side, sub, c);
+            put_marker(len, num, i, sub, len);
+            return (1);
+        }
     }
+    return (0);
 }
 
-void    fill_matrix(int side, int len, t_sq arr[26][4])
+void   delete_tetro(int num, int side)
+{
+    int i;
+
+    i = -1;
+    while (++i < (side * side))
+        matrix[num][i].field = '.';
+}
+
+void   clean_matrix(int len, int side)
+{
+    int i;
+
+    i = -1;
+    while (++i < len)
+        delete_tetro(i, side);
+}
+
+int    fill_field(int side, int len, t_sq arr[26][4])
+{
+    int i;
+    int t_num;
+
+    i = -1;
+    while (++i < len)
+    {
+        t_num = pop_tetro(i);
+        if (!(put_tetro(side, i, arr[t_num], t_num + 'A', len)))
+            return (0);
+    }
+    return (1);
+}
+
+int    fill_matrix(int side, int len, t_sq arr[26][4])
 {
     int i;
     int j;
 
-    init_matrix(side);
+    init_pos_arr(len);
+    set_marker(len, arr);
+    init_matrix(side, len);
     // check_change_comb(len, arr);
     // init_pos_arr(len);
-    
+    i = 1;
+    while (i)
+    {
+        if (fill_field(side, len, arr))
+            i = 0;
+        else
+        {
+            change_comb(len);
+            while (!(check_pos_arr(len)))
+            {
+                change_comb(len);
+                if (is_sort_arr(len))
+                    return (0);
+            }
+            clean_matrix(len, side);
+        }
+    }
     i = -1;
-    while (++i < side)
+    while (++i < len)
     {
         j = -1;
         while (++j < (side * side))
         {
-            ft_putnbr(matrix[i][j].col);
-            ft_putstr(" ");
-            ft_putnbr(matrix[i][j].row);
-            ft_putstr(", ");
+            ft_putchar(matrix[i][j].field);
+            // ft_putnbr(matrix[i][j].col);
+            // ft_putstr(" ");
+            // ft_putnbr(matrix[i][j].row);
+            // ft_putstr(", ");
         }
         ft_putchar('\n');
     }
+    print_square(len, side);
+    return (1);
 }

@@ -37,6 +37,19 @@ int		get_side(int square)
 	return (side);
 }
 
+void    call_fill_matrix(int side, int len, t_sq arr[26][4])
+{
+    init_pos_arr(len);
+    set_marker(len, arr);
+    while (1)
+    {
+        if (fill_matrix(side, len, arr))
+            return ;
+        else
+            side++;
+    }
+}
+
 int		main(int ac, char **av)
 {
 	clock_t	start = clock();
@@ -60,7 +73,7 @@ int		main(int ac, char **av)
 	else
         ft_putendl(ft_itoa(get_side(len * 4)));
     // check_change_comb(len, arr);
-	fill_matrix(get_side(len * 4), len, arr);
+    call_fill_matrix(get_side(len * 4), len, arr);
 	clock_t stop = clock();
 	double elapsed = (double)(stop - start) / CLOCKS_PER_SEC;
 	printf("time of program work: %f", elapsed);
