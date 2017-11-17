@@ -1,9 +1,10 @@
-SRC = main.c read_file.c change_comb.c fill_matrix.c
+SRC = $(wildcard srcs/*.c)
 OBJ = $(SRC:.c=.o)
 NAME = fillit
 FLAGS = -Wall -Werror -Wextra
 CC = gcc
 LIBFT_DIR = libft/
+INC_DIR = includes/
 
 all: $(NAME) $(SRC)
 
@@ -12,7 +13,7 @@ $(NAME): $(OBJ)
 	@echo "Create fillit "
 
 %.o: %.c
-	@$(CC) $(FLAGS) -c -o $@ $^ -I$(LIBFT_DIR)
+	@$(CC) $(FLAGS) -c -o $@ $^ -I$(INC_DIR)
 
 clean:
 	@/bin/rm -f $(OBJ)
