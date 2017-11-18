@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmallaba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/18 12:34:49 by fmallaba          #+#    #+#             */
+/*   Updated: 2017/11/18 12:34:51 by fmallaba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "fillit.h"
 
@@ -37,7 +49,7 @@ static int		check_block(char *buf)
 
 	i = 0;
 	sharp = 0;
-	while (i < 20 && buf[i])
+	while (i < 19 && buf[i])
 	{
 		row = 0;
 		while (row++ != 4 && buf[i])
@@ -52,7 +64,9 @@ static int		check_block(char *buf)
 			return (0);
 		i++;
 	}
-	if (sharp != 4 || !(buf[20] == '\n' || buf[20] == '\0'))
+	if (sharp != 4 || !(buf[19] == '\n' || buf[19] == '\0'))
+		return (0);
+	if (buf[20] != '.' && !(buf[19] == '\n' || buf[19] == '\0'))
 		return (0);
 	return (check_tetrimo(buf, sharp));
 }
@@ -114,11 +128,13 @@ int				read_file(int fd, t_sq arr[26][4])
 	len = 0;
 	if (fd < 0)
 		return (-1);
+	ft_memset(buf, 46, 21);
 	while (read(fd, &buf, 21) && len < 26)
 	{
 		if (check_block(buf) == 0)
 			return (-1);
 		create_subarr(buf, arr[len]);
+		ft_memset(buf, 46, 21);
 		len++;
 	}
 	return (len);

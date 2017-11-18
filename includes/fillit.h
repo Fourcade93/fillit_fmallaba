@@ -2,6 +2,7 @@
 # define FILLIT_H
 
 # include <fcntl.h>
+# define USAGE "usage: fillit file-name"
 
 typedef struct	s_sq
 {
@@ -16,6 +17,13 @@ typedef struct  s_matrix
     char        field;
 }               t_matrix;
 
+t_sq			pos_arr[26];
+t_matrix		matrix[26][200];
+
+void			clean_matrix(int len, int side);
+void			print_square(int len, int side);
+void			init_matrix(int side, int len);
+int				put_tetro(int total, int num, t_sq sub[4], int len);
 int		        fill_matrix(int side, int len, t_sq arr[26][4]);
 void		    check_change_comb(int len, t_sq arr[26][4]);
 void            change_comb(int len);
