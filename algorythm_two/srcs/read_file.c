@@ -1,0 +1,132 @@
+#include "libft.h"
+#include "fillit.h"
+
+static int		check_tetrimo(char *buf, int sharp)
+{
+	int	check;
+	int	i;
+
+	check = 0;
+	i = 0;
+	while (sharp)
+	{
+		if (buf[i] == '#')
+		{
+			sharp--;
+			if (buf[i + 1] == '#')
+				check++;
+			if (i > 0 && buf[i - 1] == '#')
+				check++;
+			if (i < 16 && buf[i + 5] == '#')
+				check++;
+			if (i > 4 && buf[i - 5] == '#')
+				check++;
+		}
+		i++;
+	}
+	if (check == 6 || check == 8)
+		return (1);
+	return (0);
+}
+
+static int		check_block(char *buf)
+{
+	int	row;
+	int	sharp;
+	int	i;
+
+	i = 0;
+	sharp = 0;
+	while (i < 19 && buf[i])
+	{
+		row = 0;
+		while (row++ != 4 && buf[i])
+		{
+			if (!(buf[i] == '#' || buf[i] == '.'))
+				return (0);
+			if (buf[i] == '#')
+				sharp++;
+			i++;
+		}
+		if (buf[i] != '\n')
+			return (0);
+		i++;
+	}
+	if (sharp != 4 || !(buf[19] == '\n' || buf[19] == '\0'))
+		return (0);
+	if (buf[20] != '-')
+		if (!(buf[20] == '\n' || buf[20] == '\0'))
+			return (0);
+	return (check_tetrimo(buf, sharp));
+}
+
+static void		move_to_left(t_sq sub[4])
+{
+	int	min;
+	int	i;
+
+	i = 0;
+	min = sub[i].x;
+	while (i < 4)
+	{
+		if (sub[i].x < min)
+			min = sub[i].x;
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		sub[i].x = sub[i].x - min;
+		i++;
+	}
+}
+
+static void		create_subarr(char *buf, t_sq sub[4])
+{
+	int		col;
+	int		row;
+	int		i;
+
+	col = 0;
+	row = 0;
+	i = 0;
+	while (*buf)
+	{
+		if (col == 5)
+		{
+			col = 0;
+			(i > 0) ? row++ : row;
+		}
+		if (*buf == '#')
+		{
+			sub[i].x = col;
+			sub[i].y = row;
+			i++;
+		}
+		buf++;
+		col++;
+	}
+	move_to_left(sub);
+}
+
+int				read_file(int fd, t_sq arr[26][4])
+{
+	char	buf[21];
+	int		len;
+
+	len = 0;
+	if (fd < 0)
+		return (-1);
+	ft_memset(buf, 45, 21);
+	while (read(fd, &buf, 21))
+	{
+		if (!(check_block(buf)) || len > 25)
+			return (-1);
+		create_subarr(buf, arr[len]);
+		ft_memset(buf, 45, 21);
+		len++;
+	}
+	if (len == 0)
+		return (-1);
+	return (len);
+}
