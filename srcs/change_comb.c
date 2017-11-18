@@ -38,7 +38,8 @@ static void    swap_next(curr, len)
     i = curr + 1;
     while (i < len)
     {
-        if (pos_arr[i].x < pos_arr[min].x && pos_arr[i].x > pos_arr[curr].x)
+		if (pos_arr[i].x < pos_arr[min].x && pos_arr[i].x > pos_arr[curr].x && \
+			pos_arr[i].y != pos_arr[curr].y)
             min = i;
         i++;
     }
@@ -51,7 +52,8 @@ void            change_comb(int len)
     int curr;
 
     curr = len - 1;
-    if (pos_arr[curr].x > pos_arr[curr - 1].x)
+	if (pos_arr[curr].x > pos_arr[curr - 1].x && \
+		pos_arr[curr].y != pos_arr[curr - 1].y)
     {
         swap_sq(&pos_arr[curr], &pos_arr[curr - 1]);
         return ;
@@ -85,18 +87,15 @@ void    check_change_comb(int len, t_sq arr[26][4]) //delete_me!!!
     while (i)
     {
         j = 0;
-        if (check_pos_arr(len))
-        {
-            while (j < len)
-            {
-                ft_putstr(ft_itoa(pos_arr[j].x));
-                ft_putchar(' ');
-                ft_putstr(ft_itoa(pos_arr[j].y));
-                ft_putstr(", ");
-                j++;
-            }
-            ft_putchar('\n');
-        }
+		while (j < len)
+		{
+			ft_putstr(ft_itoa(pos_arr[j].x));
+			ft_putchar(' ');
+			ft_putstr(ft_itoa(pos_arr[j].y));
+			ft_putstr(", ");
+			j++;
+		}
+		ft_putchar('\n');
         change_comb(len);
         i--;
     }
