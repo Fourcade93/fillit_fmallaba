@@ -22,11 +22,11 @@ int		get_side(int square)
 	return (side);
 }
 
-void	call_fill_matrix(int side, int len, t_sq arr[26][4])
+void	call_fill_t_matrix(int side, int len, t_sq arr[26][4])
 {
 	while (1)
 	{
-		if (fill_matrix(side, len, arr))
+		if (fill_t_matrix(side, len, arr))
 			return ;
 		else
 			side++;
@@ -48,5 +48,5 @@ int		main(int ac, char **av)
 	if (!len)
 		ft_putendl("error");
 	else
-		call_fill_matrix(get_side(len * 4), len, arr);
+		call_fill_t_matrix(get_side(len * 4), len, arr);
 }

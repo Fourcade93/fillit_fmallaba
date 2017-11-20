@@ -13,30 +13,46 @@
 #include "fillit.h"
 #include "libft.h"
 
-int			fill_matrix(int side, int len, t_sq arr[26][4])
+int		fill_field(int side, int len, t_sq arr[26][4])
 {
 	int i;
+	int ret;
 
-	init_pos_arr(len);
+	i = 0;
+	while (i < len)
+	{
+		ret = fill_field_help(side, i, arr, len);
+		if (ret == 1)
+			return (1);
+		else if (!ret)
+			return (0);
+		else
+			i++;
+	}
+	return (1);
+}
+
+int		fill_t_matrix(int side, int len, t_sq arr[26][4])
+{
+	init_t_arr(len);
 	set_marker(len, arr);
-	init_matrix(side, len);
-	i = 1;
-	while (i)
+	init_t_matrix(side, len);
+	while (1)
 	{
 		if (fill_field(side, len, arr))
-			i = 0;
+			break ;
 		else
 		{
-			change_comb(len);
-			if (is_sort_arr(len))
+			if (is_sort_arr(len) || is_same(len))
 				return (0);
-			while (!(check_pos_arr(len)))
+			change_comb(len);
+			while (!(check_t_arr(len)))
 			{
-				if (is_sort_arr(len) || is_same(len))
+				if (is_sort_arr(len))
 					return (0);
 				change_comb(len);
 			}
-			clean_matrix(len, side);
+			clean_t_matrix(len, side);
 		}
 	}
 	print_square(len, side);

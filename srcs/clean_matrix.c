@@ -20,29 +20,29 @@ void		delete_tetro(int num, int side, int len)
 
 	i = -1;
 	while (++i < side * side)
-		if (ft_isalpha(matrix[num][i].field))
+		if (ft_isalpha(t_matrix[num][i].field))
 		{
-			matrix[num][i].field = '.';
+			t_matrix[num][i].field = '.';
 			j = num;
-			while (++j < len)
-				matrix[j][i].field = '.';
+			while (j++ < len)
+				t_matrix[j][i].field = '.';
 		}
 }
 
-static void	clean_matrix_help(int num, int side)
+static void	clean_t_matrix_help(int num, int side)
 {
 	int i;
 
 	i = -1;
 	while (++i < (side * side))
-		matrix[num][i].field = '.';
+		t_matrix[num][i].field = '.';
 }
 
-void		clean_matrix(int len, int side)
+void		clean_t_matrix(int len, int side)
 {
 	int i;
 
 	i = -1;
 	while (++i < len)
-		clean_matrix_help(i, side);
+		clean_t_matrix_help(i, side);
 }

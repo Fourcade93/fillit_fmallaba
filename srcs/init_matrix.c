@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-void		init_matrix(int side, int len)
+void		init_t_matrix(int side, int len)
 {
 	int i;
 	int j;
@@ -32,9 +32,9 @@ void		init_matrix(int side, int len)
 				col = 0;
 				row++;
 			}
-			matrix[i][j].field = '.';
-			matrix[i][j].col = col;
-			matrix[i][j].row = row;
+			t_matrix[i][j].field = '.';
+			t_matrix[i][j].col = col;
+			t_matrix[i][j].row = row;
 			col++;
 		}
 	}

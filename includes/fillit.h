@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fillit.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmallaba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/20 21:08:07 by fmallaba          #+#    #+#             */
+/*   Updated: 2017/11/20 21:08:10 by fmallaba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FILLIT_H
 # define FILLIT_H
 
@@ -10,34 +22,29 @@ typedef struct	s_sq
 	int			y;
 }				t_sq;
 
-typedef struct  s_matrix
+typedef struct	s_matrix
 {
-    int         col;
-    int         row;
-    char        field;
-}               t_matrix;
+	int			col;
+	int			row;
+	char		field;
+}				t_matrx;
 
-t_sq			pos_arr[26];
-t_matrix		matrix[26][200];
+t_sq			t_arr[26];
+t_matrx			t_matrix[26][200];
 
-void			add_tetro(int num, int i, t_sq sub[4], char c);
-void			clean_matrix(int len, int side);
+void			delete_tetro(int num, int side, int len);
+int				fill_field_help(int	side, int i, t_sq arr[26][4], int len);
+void			clean_t_matrix(int len, int side);
 void			print_square(int len, int side);
-void			init_matrix(int side, int len);
-int				put_tetro(int total, int num, t_sq sub[4], int len, int i);
-int		        fill_matrix(int side, int len, t_sq arr[26][4]);
-void		    check_change_comb(int len, t_sq arr[26][4]);
-void            change_comb(int len);
-int             check_pos_arr(int len);
-void            init_pos_arr(int len);
-int             is_sort_arr(int len);
-int             is_same(int len);
-void            set_marker(int len, t_sq arr[26][4]);
-int             pop_tetro(int num);
-int			    read_file(int fd, t_sq arr[26][4]);
-
-int				check_field(int num, int i, int total, t_sq sub[4]);
-int 			fill_field(int side, int len, t_sq arr[26][4]);
-void 			delete_tetro(int num, int side, int len);
+void			init_t_matrix(int side, int len);
+int				fill_t_matrix(int side, int len, t_sq arr[26][4]);
+void			change_comb(int len);
+int				check_t_arr(int len);
+void			init_t_arr(int len);
+int				is_sort_arr(int len);
+int				is_same(int len);
+void			set_marker(int len, t_sq arr[26][4]);
+int				pop_tetro(int num);
+int				read_file(int fd, t_sq arr[26][4]);
 
 #endif

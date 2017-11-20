@@ -33,8 +33,8 @@ static void    sort_arr(int curr, int len)
         next = curr + 1;
         while (next < len)
         {
-            if (pos_arr[curr].x > pos_arr[next].x)
-                swap_sq(&pos_arr[curr], &pos_arr[next]);
+            if (t_arr[curr].x > t_arr[next].x)
+                swap_sq(&t_arr[curr], &t_arr[next]);
             next++;
         }
         curr++;
@@ -50,11 +50,11 @@ static void    swap_next(curr, len)
     i = curr + 1;
     while (i < len)
     {
-        if (pos_arr[i].x < pos_arr[min].x && pos_arr[i].x > pos_arr[curr].x)
+        if (t_arr[i].x < t_arr[min].x && t_arr[i].x > t_arr[curr].x)
             min = i;
         i++;
     }
-    swap_sq(&pos_arr[curr], &pos_arr[min]);
+    swap_sq(&t_arr[curr], &t_arr[min]);
 }
 
 void            change_comb(int len)
@@ -63,15 +63,15 @@ void            change_comb(int len)
     int curr;
 
     curr = len - 1;
-    if (pos_arr[curr].x > pos_arr[curr - 1].x)
+    if (t_arr[curr].x > t_arr[curr - 1].x)
     {
-        swap_sq(&pos_arr[curr], &pos_arr[curr - 1]);
+        swap_sq(&t_arr[curr], &t_arr[curr - 1]);
         return ;
     }
     while (curr > 0)
     {
         next = curr - 1;
-        if (pos_arr[curr].x > pos_arr[next].x)
+        if (t_arr[curr].x > t_arr[next].x)
         {
             swap_next(next, len);
             sort_arr(curr, len);
@@ -83,5 +83,5 @@ void            change_comb(int len)
 
 int             pop_tetro(int num)
 {
-    return (pos_arr[num].x);
+    return (t_arr[num].x);
 }

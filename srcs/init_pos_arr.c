@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_pos_arr.c                                     :+:      :+:    :+:   */
+/*   init_t_arr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmallaba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,15 +13,15 @@
 #include "fillit.h"
 #include "libft.h"
 
-void		init_pos_arr(int len)
+void		init_t_arr(int len)
 {
 	int i;
 
 	i = 0;
 	while (i < len)
 	{
-		pos_arr[i].x = i;
-		pos_arr[i].y = -1;
+		t_arr[i].x = i;
+		t_arr[i].y = -1;
 		i++;
 	}
 }
@@ -49,13 +49,13 @@ void		set_marker(int len, t_sq arr[26][4])
 	while (i < len)
 	{
 		j = i + 1;
-		if (pos_arr[i].y == -1)
+		if (t_arr[i].y == -1)
 			while (j < len)
 			{
-				if (check_tetro(arr[i], arr[j]) && pos_arr[j].y == -1)
+				if (check_tetro(arr[i], arr[j]) && t_arr[j].y == -1)
 				{
-					pos_arr[i].y = pos_arr[i].x;
-					pos_arr[j].y = pos_arr[i].x;
+					t_arr[i].y = t_arr[i].x;
+					t_arr[j].y = t_arr[i].x;
 				}
 				j++;
 			}

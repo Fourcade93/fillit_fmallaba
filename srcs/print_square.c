@@ -30,8 +30,8 @@ static int	get_tetro(int side, char (*square)[], int i)
 			j--;
 			stop = -1;
 		}
-		else if (ft_isalpha(matrix[i][j].field))
-			(*square)[k] = matrix[i][j].field;
+		else if (ft_isalpha(t_matrix[i][j].field))
+			(*square)[k] = t_matrix[i][j].field;
 		k++;
 		j++;
 		stop++;

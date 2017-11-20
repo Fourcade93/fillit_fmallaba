@@ -64,9 +64,8 @@ static int		check_block(char *buf)
 			return (0);
 		i++;
 	}
-	if (sharp != 4 || !(buf[19] == '\n'))
-		return (0);
-	if (buf[20] != 127 && !(buf[19] == '\n'))
+	if ((sharp != 4 || buf[19] != '\n') ||
+		(buf[20] != 127 && buf[19] != '\n'))
 		return (0);
 	return (check_tetrimo(buf, sharp));
 }
