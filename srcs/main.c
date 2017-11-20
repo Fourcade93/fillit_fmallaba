@@ -45,7 +45,7 @@ int		main(int ac, char **av)
 	}
 	else
 		len = read_file(open(av[1], O_RDONLY), arr);
-	if (len == -1)
+	if (!len)
 		ft_putendl("error");
 	else
 		call_fill_matrix(get_side(len * 4), len, arr);

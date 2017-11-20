@@ -64,9 +64,9 @@ static int		check_block(char *buf)
 			return (0);
 		i++;
 	}
-	if (sharp != 4 || !(buf[19] == '\n' || buf[19] == '\0'))
+	if (sharp != 4 || !(buf[19] == '\n'))
 		return (0);
-	if (buf[20] != '.' && !(buf[19] == '\n' || buf[19] == '\0'))
+	if (buf[20] != 127 && !(buf[19] == '\n'))
 		return (0);
 	return (check_tetrimo(buf, sharp));
 }
@@ -124,18 +124,24 @@ int				read_file(int fd, t_sq arr[26][4])
 {
 	char	buf[21];
 	int		len;
+	int		check;
 
 	len = 0;
 	if (fd < 0)
 		return (-1);
-	ft_memset(buf, 46, 21);
+	check = 0;
+	ft_memset(buf, 127, 21);
 	while (read(fd, &buf, 21) && len < 26)
 	{
+		if (buf[20] == 127)
+			check = 1;
 		if (check_block(buf) == 0)
-			return (-1);
+			return (0);
 		create_subarr(buf, arr[len]);
-		ft_memset(buf, 46, 21);
+		ft_memset(buf, 127, 21);
 		len++;
 	}
+	if (!check)
+		return (0);
 	return (len);
 }

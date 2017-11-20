@@ -13,23 +13,6 @@
 #include "fillit.h"
 #include "libft.h"
 
-static int	fill_field(int side, int len, t_sq arr[26][4])
-{
-	int i;
-	int t_num;
-	int	total;
-
-	i = -1;
-	total = side * side;
-	while (++i < len)
-	{
-		t_num = pop_tetro(i);
-		if (!(put_tetro(total, i, arr[t_num], len)))
-			return (0);
-	}
-	return (1);
-}
-
 int			fill_matrix(int side, int len, t_sq arr[26][4])
 {
 	int i;

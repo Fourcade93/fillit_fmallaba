@@ -20,10 +20,11 @@ typedef struct  s_matrix
 t_sq			pos_arr[26];
 t_matrix		matrix[26][200];
 
+void			add_tetro(int num, int i, t_sq sub[4], char c);
 void			clean_matrix(int len, int side);
 void			print_square(int len, int side);
 void			init_matrix(int side, int len);
-int				put_tetro(int total, int num, t_sq sub[4], int len);
+int				put_tetro(int total, int num, t_sq sub[4], int len, int i);
 int		        fill_matrix(int side, int len, t_sq arr[26][4]);
 void		    check_change_comb(int len, t_sq arr[26][4]);
 void            change_comb(int len);
@@ -34,5 +35,9 @@ int             is_same(int len);
 void            set_marker(int len, t_sq arr[26][4]);
 int             pop_tetro(int num);
 int			    read_file(int fd, t_sq arr[26][4]);
+
+int				check_field(int num, int i, int total, t_sq sub[4]);
+int 			fill_field(int side, int len, t_sq arr[26][4]);
+void 			delete_tetro(int num, int side, int len);
 
 #endif

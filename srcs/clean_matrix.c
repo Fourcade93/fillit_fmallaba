@@ -5,14 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmallaba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/18 12:33:44 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/18 12:33:48 by fmallaba         ###   ########.fr       */
+/*   Created: 2017/11/20 16:50:43 by fmallaba          #+#    #+#             */
+/*   Updated: 2017/11/20 16:50:45 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include "libft.h"
 
-static void	delete_tetro(int num, int side)
+void		delete_tetro(int num, int side, int len)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < side * side)
+		if (ft_isalpha(matrix[num][i].field))
+		{
+			matrix[num][i].field = '.';
+			j = num;
+			while (++j < len)
+				matrix[j][i].field = '.';
+		}
+}
+
+static void	clean_matrix_help(int num, int side)
 {
 	int i;
 
@@ -27,5 +44,5 @@ void		clean_matrix(int len, int side)
 
 	i = -1;
 	while (++i < len)
-		delete_tetro(i, side);
+		clean_matrix_help(i, side);
 }

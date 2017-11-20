@@ -35,7 +35,7 @@ int				check_pos_arr(int len)
 	return (1);
 }
 
-int			is_sort_arr(int len)
+int				is_sort_arr(int len)
 {
 	int i;
 	int j;
@@ -50,7 +50,7 @@ int			is_sort_arr(int len)
 	return (1);
 }
 
-int			is_same(int len)
+int				is_same(int len)
 {
 	int i;
 	int same;
