@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list_pushback.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmallaba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 15:55:23 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/09 15:57:00 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/22 11:55:20 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,6 @@ void	ft_list_pushback(t_list **alst, t_list *new)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
+	else
+		tmp = new;
 }

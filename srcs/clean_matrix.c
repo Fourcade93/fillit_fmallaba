@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmallaba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 16:50:43 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/20 16:50:45 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:41:49 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,4 @@ void		delete_tetro(int num, int side, int len)
 			while (++j < len)
 				g_matrix[j][i].field = '.';
 		}
-}
-
-static void	clean_g_matrix_help(int num, int side)
-{
-	int i;
-
-	i = -1;
-	while (++i < (side * side))
-		g_matrix[num][i].field = '.';
-}
-
-void		clean_g_matrix(int len, int side)
-{
-	int i;
-
-	i = -1;
-	while (++i < len)
-		clean_g_matrix_help(i, side);
 }

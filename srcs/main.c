@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmallaba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 12:34:23 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/18 13:03:22 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:46:35 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ void	call_fill_g_matrix(int side, int len, t_sq arr[26][4])
 {
 	while (1)
 	{
-		if (fill_g_matrix(side, len, arr))
+		init_g_matrix(side, len);
+		if (fill_g_matrix(side, len, arr, 0))
+		{
+			print_square(len, side);
 			return ;
+		}
 		else
 			side++;
 	}

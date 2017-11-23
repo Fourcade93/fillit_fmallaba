@@ -3,58 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   fill_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmallaba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 12:33:55 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/18 12:33:58 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/23 20:46:03 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
 
-int		fill_field(int side, int len, t_sq arr[26][4])
+int		fill_g_matrix(int side, int len, t_sq arr[26][4], int num)
 {
-	int i;
-	int ret;
+	int	i;
+	int	total;
 
+	if (num == len)
+		return (1);
 	i = 0;
-	while (i < len)
+	total = side * side;
+	while (i < total)
 	{
-		ret = fill_field_help(side, i, arr, len);
-		if (ret == 1)
-			return (1);
-		else if (!ret)
-			return (0);
-		else
-			i++;
-	}
-	return (1);
-}
-
-int		fill_g_matrix(int side, int len, t_sq arr[26][4])
-{
-	init_g_arr(len);
-	set_marker(len, arr);
-	init_g_matrix(side, len);
-	while (1)
-	{
-		if (fill_field(side, len, arr))
-			break ;
-		else
-		{
-			if (is_sort_arr(len) || is_same(len))
-				return (0);
-			change_comb(len);
-			while (!(check_g_arr(len)))
+		if (g_matrix[num][i].field == '.')
+			if (check_field(num, i, total, arr[num]))
 			{
-				if (is_sort_arr(len))
-					return (0);
-				change_comb(len);
+				add_tetro(num, i, arr[num], num + 'A');
+				put_marker(num, i, arr[num], len);
+				if (!(fill_g_matrix(side, len, arr, num + 1)))
+					delete_tetro(num, side, len);
+				else
+					return (1);
 			}
-			clean_g_matrix(len, side);
-		}
+		i++;
 	}
-	print_square(len, side);
-	return (1);
+	return (0);
 }
