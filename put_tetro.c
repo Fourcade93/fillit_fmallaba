@@ -6,12 +6,11 @@
 /*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 12:34:38 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/23 20:48:39 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/26 17:02:25 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "libft.h"
 
 int		check_field(int num, int i, int total, t_sq sub[4])
 {

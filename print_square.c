@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_square.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmallaba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 12:34:31 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/18 12:34:33 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/26 17:00:59 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "libft.h"
 
 static int	get_tetro(int side, char (*square)[], int i)
 {
@@ -53,5 +52,5 @@ void		print_square(int len, int side)
 	}
 	square[k] = '\n';
 	square[k + 1] = '\0';
-	ft_putstr(square);
+	write(1, &square, (side * side + side + 1));
 }

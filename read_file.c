@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmallaba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 12:34:49 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/18 12:34:51 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/26 17:02:26 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "fillit.h"
 
 static int		check_tetrimo(char *buf, int sharp)

@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_pushback.c                                 :+:      :+:    :+:   */
+/*   clean_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 15:55:23 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/22 11:55:20 by fmallaba         ###   ########.fr       */
+/*   Created: 2017/11/20 16:50:43 by fmallaba          #+#    #+#             */
+/*   Updated: 2017/11/26 17:01:11 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fillit.h"
 
-void	ft_list_pushback(t_list **alst, t_list *new)
+void		delete_tetro(int num, int side, int len)
 {
-	t_list	*tmp;
+	int	i;
+	int	j;
 
-	if (alst == NULL || new == NULL)
-		return ;
-	tmp = (*alst);
-	if (tmp)
-	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-	else
-		tmp = new;
+	i = -1;
+	while (++i < side * side)
+		if (ft_isalpha(g_matrix[num][i].field))
+		{
+			g_matrix[num][i].field = '.';
+			j = num;
+			while (++j < len)
+				g_matrix[j][i].field = '.';
+		}
 }

@@ -1,31 +1,25 @@
-SRC = $(wildcard srcs/*.c)
+SRC = clean_matrix.c fill_matrix.c init_matrix.c main.c print_square.c \
+put_tetro.c read_file.c helpers.c
 OBJ = $(SRC:.c=.o)
 NAME = fillit
 FLAGS = -Wall -Werror -Wextra
 CC = gcc
-LIBFT_DIR = libft/
-INC_DIR = includes/
 
-all: $(NAME) $(SRC)
+all: $(SRC) $(NAME)
 
-$(NAME): create_lib $(OBJ)
-	@$(CC) $(FLAGS) -o $@ $(OBJ) -L$(LIBFT_DIR) -lft
+$(NAME): $(OBJ)
+	@$(CC) $(FLAGS) -o $@ $^
 	@echo "Create fillit"
 
-create_lib:
-	@make -C $(LIBFT_DIR)
-
 %.o: %.c
-	@$(CC) $(FLAGS) -c -o $@ $^ -I$(INC_DIR)
+	$(CC) $(FLAGS) -c -o $@ $<
 
 clean:
 	@/bin/rm -f $(OBJ)
-	@make clean -C $(LIBFT_DIR)
 	@echo "Delete object-files"
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	@make fclean -C $(LIBFT_DIR)
 	@echo "Delete fillit"
 
 re: fclean all

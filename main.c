@@ -6,14 +6,31 @@
 /*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 12:34:23 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/23 20:46:35 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/26 18:59:19 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "fillit.h"
 
-int		get_side(int square)
+static int	ft_sqrt(int nb)
+{
+	int i;
+
+	i = 1;
+	if (nb <= 0)
+		return (0);
+	if (nb == 1)
+		return (nb);
+	while (i * i <= nb && i * i > 0)
+	{
+		if (i * i == nb)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+static int	get_side(int square)
 {
 	int	side;
 
@@ -22,7 +39,7 @@ int		get_side(int square)
 	return (side);
 }
 
-void	call_fill_g_matrix(int side, int len, t_sq arr[26][4])
+static void	call_fill_g_matrix(int side, int len, t_sq arr[26][4])
 {
 	while (1)
 	{
@@ -37,20 +54,20 @@ void	call_fill_g_matrix(int side, int len, t_sq arr[26][4])
 	}
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_sq	arr[26][4];
 	int		len;
 
 	if (ac != 2)
 	{
-		ft_putendl(USAGE);
+		write(1, USAGE, 25);
 		return (0);
 	}
 	else
 		len = read_file(open(av[1], O_RDONLY), arr);
 	if (!len)
-		ft_putendl("error");
+		write(1, "error\n", 6);
 	else
 		call_fill_g_matrix(get_side(len * 4), len, arr);
 }
