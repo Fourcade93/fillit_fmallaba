@@ -6,7 +6,7 @@
 /*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 21:08:07 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/26 17:38:57 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/27 12:42:14 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			delete_tetro(int num, int side, int len);
 void			add_tetro(int num, int i, t_sq sub[4], char c);
 void			put_marker(int num, int i, t_sq sub[4], int len);
 int				check_field(int num, int i, int total, t_sq sub[4]);
-int 			ft_isalpha(char c);
-void 			*ft_memset(void *ptr, int val, size_t len);
+int				ft_isalpha(char c);
+void			*ft_memset(void *ptr, int val, size_t len);
 
 #endif
