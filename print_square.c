@@ -6,7 +6,7 @@
 /*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 12:34:31 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/26 17:00:59 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/28 15:22:11 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ void		print_square(int len, int side)
 	}
 	square[k] = '\n';
 	square[k + 1] = '\0';
-	write(1, &square, (side * side + side + 1));
+	write(1, &square, (side * side + side));
 }

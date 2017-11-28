@@ -6,7 +6,7 @@
 /*   By: fmallaba <fmallaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/18 12:34:23 by fmallaba          #+#    #+#             */
-/*   Updated: 2017/11/27 12:39:49 by fmallaba         ###   ########.fr       */
+/*   Updated: 2017/11/28 15:21:31 by fmallaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,20 @@ int			main(int ac, char **av)
 {
 	t_sq	arr[26][4];
 	int		len;
+	int		fd;
 
+	len = 0;
 	if (ac != 2)
 	{
-		write(1, USAGE, 25);
+		write(1, USAGE, 24);
 		return (0);
 	}
 	else
-		len = read_file(open(av[1], O_RDONLY), arr);
+	{
+		fd = open(av[1], O_RDONLY);
+		if (fd > 0)
+			len = read_file(fd, arr);
+	}
 	if (!len)
 		write(1, "error\n", 6);
 	else
